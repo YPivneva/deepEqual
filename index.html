@@ -8,59 +8,60 @@
     />
     <title>Функция сравнения</title>
     <link rel="icon" href="./img/favicon.ico" type="image/x-icon" />
+    <script>
+        const obj1 = {
+          a: {
+            b: 1,
+            },
+        };
+        const obj2 = {
+          a: {
+            b: 2,
+          },
+        };
+          const obj3 = {
+          a: {
+            b: 1,
+          },
+        };
+        function deepEqual(data1, data2){
+          let z = JSON.stringify(data1);
+          let a = JSON.stringify(data2);
+          if (z == a) console.log("OK");
+          else{
+            const empty =
+            {}
+            
+          const isObject = x =>
+            Object (x) === x
+            
+          const diff1 = (left = {}, right = {}, rel = "left") =>
+            Object.entries (left)
+              .map
+                ( ([ k, v ]) =>
+                    isObject (v) && isObject (right[k])
+                      ? [ k, diff1 (v, right[k], rel) ]
+                      : right[k] !== v
+                        ? [ k, { [rel]: v } ]
+                        : [ k, empty ]
+                )
+              .reduce
+                ( (acc, [ k, v ]) =>
+                    v === empty
+                      ? acc
+                      : { ...acc, [k]: v }
+                , empty
+                )
+            console.log (diff1 (data1, data2, "right"))
+          }
+        }
+        deepEqual(obj1,obj1);
+        deepEqual(obj1,obj2);
+        deepEqual(obj1,obj3);
+      </script>
   </head>
   <body class="">
     
-    <script>
-      const obj1 = {
-        a: {
-          b: 1,
-          },
-      };
-      const obj2 = {
-        a: {
-          b: 2,
-        },
-      };
-        const obj3 = {
-        a: {
-          b: 1,
-        },
-      };
-      function deepEqual(data1, data2){
-        let z = JSON.stringify(data1);
-        let a = JSON.stringify(data2);
-        if (z == a) console.log("OK");
-        else{
-          const empty =
-          {}
-          
-        const isObject = x =>
-          Object (x) === x
-          
-        const diff1 = (left = {}, right = {}, rel = "left") =>
-          Object.entries (left)
-            .map
-              ( ([ k, v ]) =>
-                  isObject (v) && isObject (right[k])
-                    ? [ k, diff1 (v, right[k], rel) ]
-                    : right[k] !== v
-                      ? [ k, { [rel]: v } ]
-                      : [ k, empty ]
-              )
-            .reduce
-              ( (acc, [ k, v ]) =>
-                  v === empty
-                    ? acc
-                    : { ...acc, [k]: v }
-              , empty
-              )
-          console.log (diff1 (data1, data2, "right"))
-        }
-      }
-      deepEqual(obj1,obj1);
-      deepEqual(obj1,obj2);
-      deepEqual(obj1,obj3);
-    </script>
+    
   </body>
 </html>
