@@ -35,14 +35,24 @@
             throw TypeError("invalid data type");
           }
           if(Object.keys(data1).length == Object.keys(data2).length || Object.keys(data1).length > Object.keys(data2).length){
-            for (const key of Object.keys(data1)) {
-              let path = data2[key];
-              if(data1[key] !== data2[key]) return console.log(`Error ${data1[key]}`);
+            for (const [key, value] of Object.entries(data1)) {
+              if(data1[key] !== data2[key]){
+                if(typeof value == "object"){
+                  return console.log(`Error ${key}`);
+                }else{
+                  return console.log(`Error ${data1[key]}`);
+                }
+              }
             }
           }else if(Object.keys(data1).length < Object.keys(data2).length){
             for (const key of Object.keys(data2)) {
-              let path = data2[key];
-              if(data2[key] !== data1[key]) return console.log(`Error ${data2[key]}`);
+              if(data2[key] !== data1[key]){
+                if(typeof value == "object"){
+                  return console.log(`Error ${key}`);
+                }else{
+                  return console.log(`Error ${data2[key]}`);
+                }
+              }
             }
           }
         }
