@@ -45,7 +45,7 @@
               }
             }
           }else if(Object.keys(data1).length < Object.keys(data2).length){
-            for (const key of Object.keys(data2)) {
+            for (const [key, value] of Object.entries(data2)) {
               if(data2[key] !== data1[key]){
                 if(typeof value == "object"){
                   return console.log(`Error ${key}`);
