@@ -24,37 +24,32 @@
             b: 1,
           },
         };
+        const arr1 = [10, 15, 20];
+        const arr2 = [10, 15, 30];
+        const arr3 = [10, 15, 30, 40];
         function deepEqual(data1, data2){
-          let z = JSON.stringify(data1);
-          let a = JSON.stringify(data2);
-          if (z == a) console.log("OK");
-          else{
-            const empty =
-            {}
-            
-          const isObject = x =>
-            Object (x) === x
-            
-          const diff1 = (left = {}, right = {}, rel = "left") =>
-            Object.entries (left)
-              .map
-                ( ([ k, v ]) =>
-                    isObject (v) && isObject (right[k])
-                      ? [ k, diff1 (v, right[k], rel) ]
-                      : right[k] !== v
-                        ? [ k, { [rel]: v } ]
-                        : [ k, empty ]
-                )
-              .reduce
-                ( (acc, [ k, v ]) =>
-                    v === empty
-                      ? acc
-                      : { ...acc, [k]: v }
-                , empty
-                )
-            console.log (diff1 (data1, data2, "right"))
+          if(data1 === data2){
+            return console.log("OK")
+          }
+          if(typeof data1 === null || typeof data2 === null){
+            throw TypeError("invalid data type");
+          }
+          if(Object.keys(data1).length == Object.keys(data2).length || Object.keys(data1).length > Object.keys(data2).length){
+            for (const key of Object.keys(data1)) {
+              let path = data2[key];
+              if(data1[key] !== data2[key]) return console.log(`Error ${data1[key]}`);
+            }
+          }else if(Object.keys(data1).length < Object.keys(data2).length){
+            for (const key of Object.keys(data2)) {
+              let path = data2[key];
+              if(data2[key] !== data1[key]) return console.log(`Error ${data2[key]}`);
+            }
           }
         }
+        
+        deepEqual(arr1,arr1);
+        deepEqual(arr1,arr2);
+        deepEqual(arr1,arr3);
         deepEqual(obj1,obj1);
         deepEqual(obj1,obj2);
         deepEqual(obj1,obj3);
